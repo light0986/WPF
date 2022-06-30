@@ -59,7 +59,7 @@ namespace GamblingHero.Page
         private void RandomMap()
         {
             Random random = new Random();
-            int rdW = random.Next(10, 20) * 2 + 1;
+            int rdW = random.Next(10, 20) * 2 + 1; //地圖大小必須奇數
             int rdH = random.Next(10, 20) * 2 + 1;
 
             map = new char[rdH, rdW];
@@ -76,9 +76,9 @@ namespace GamblingHero.Page
         private void CreateMaze()
         {
             Random random = new Random();
-            int nowX = random.Next((map.GetLength(1) - 1) / 2) * 2 + 1;
-            int nowY = random.Next((map.GetLength(0) - 1) / 2) * 2 + 1;
-            startX = nowX * 100; startY = nowY * 100;
+            int nowX = random.Next((map.GetLength(1) - 1) / 2) * 2 + 1; //因為地圖大小必須奇數
+            int nowY = random.Next((map.GetLength(0) - 1) / 2) * 2 + 1; //所以減1後除以2，抓取隨機質後再乘2後加1，這樣最小座標為(1,1)，最大座標為(N-1,M-1)
+            startX = nowX * 100; startY = nowY * 100; //因為實際方塊長寬各100，所以實際座標記得乘上100
             map[nowY, nowX] = 'R';
             List<PointList> road = new List<PointList>();
             List<PointList> usedroad = new List<PointList>();
