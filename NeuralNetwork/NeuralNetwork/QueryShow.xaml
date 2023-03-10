@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeuralNetwork"
         mc:Ignorable="d"
-        Title="QueryShow" Height="400" Width="400" Closed="Window_Closed" Topmost="True" WindowStyle="ToolWindow" >
+        Title="QueryShow" Height="600" Width="400" Closing="Window_Closing" Topmost="True" WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -13,6 +13,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -46,7 +47,15 @@
                 <Label Grid.Column="2" Content="/" VerticalAlignment="Center"/>
                 <Label Grid.Column="3" x:Name="ScoreMax" VerticalAlignment="Center"/>
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="3" Margin="10 0 5 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Correct Rate: " VerticalAlignment="Center"/>
+                <Label Grid.Column="1" x:Name="CorrectRate" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="4">
                 <Border BorderBrush="Gray" BorderThickness="1" Margin="10 0 5 10">
                     <ScrollViewer>
                         <StackPanel x:Name="ScoreList"/>
@@ -58,12 +67,24 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Label Content="Description: " Margin="5 0 10 0"/>
             </Grid>
             <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray" Margin="5 0 10 10">
-                <StackPanel x:Name="DescriptionList"/>
+                <ScrollViewer>
+                    <StackPanel x:Name="DescriptionList"/>
+                </ScrollViewer>
+            </Border>
+            <Grid Grid.Row="2">
+                <Label Content="Wrong: " Margin="5 0 10 0"/>
+            </Grid>
+            <Border Grid.Row="3" BorderThickness="1" BorderBrush="Gray" Margin="5 0 10 10">
+                <ScrollViewer>
+                    <StackPanel x:Name="ResultsList"/>
+                </ScrollViewer>
             </Border>
         </Grid>
     </Grid>

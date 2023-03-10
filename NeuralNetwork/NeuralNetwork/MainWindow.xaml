@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeuralNetwork"
-        mc:Ignorable="d" Height="600" Width="800" MinHeight="600" MinWidth="800">
+        mc:Ignorable="d" Height="600" Width="800" MinHeight="600" MinWidth="800" Title="Neural Network" Closing="Window_Closing">
     <Grid>
-        <Grid>
+        <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="70"/>
@@ -66,14 +66,18 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <CheckBox Content="Double Array" Margin="10 0" VerticalContentAlignment="Center" Name="DoubleArrayCheck" Click="DoubleArrayCheck_Click"/>
                     <Button Grid.Column="1" Width="100" Height="40" Margin="0 0 10 0" Content="Look WHO" Click="WHO_Click"/>
                     <Button Grid.Column="2" Width="100" Height="40" Margin="0 0 10 0" Content="Look WIH" Click="WIH_Click"/>
-                    <Label Grid.Column="3"  Name="QueryError" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Foreground="Red"/>
-                    <Button Grid.Column="4" Width="100" Height="40" HorizontalAlignment="Left" Margin="0 10 10 10" Content="Start query" Click="StartQuery_Click"/>
+                    <Button Grid.Column="3" Width="100" Height="40" Margin="0 0 10 0" Content="Back Query" Click="Backquery_Click"/>
+                    <Label Grid.Column="4"  Name="QueryError" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Foreground="Red"/>
+                    <CheckBox Grid.Column="5" Content="Auto Train" Margin="10 0" VerticalContentAlignment="Center" Name="AutoTrainCheck" Click="AutoTrainCheck_Click"/>
+                    <Button Grid.Column="6" Width="100" Height="40" HorizontalAlignment="Left" Margin="0 10 10 10" Content="Start query" Click="StartQuery_Click"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Margin="10 0 10 10">
@@ -95,12 +99,14 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Margin="10 0" Width="100" Content="GetCSV" Click="GetCSV_Click"/>
-                <Button Grid.Column="1" Margin="10 0" Width="100" Content="Start Training" Click="StartTraining_Click"/>
+                <Button Grid.Column="0" Margin="10 0 0 0" Width="100" Content="Train CSV" Click="GetCSV_Click"/>
+                <Button Grid.Column="1" Margin="10 0 0 0" Width="100" Content="Start Training" Click="StartTraining_Click"/>
                 <Label Grid.Column="2" Content="Waiting.." Foreground="Green" VerticalAlignment="Center" Name="AppStatus"/>
-                <Button Grid.Column="3" Margin="10 0" Width="100" Content="Delect Choosed" Click="DelectChoosed_Click"/>
-                <Button Grid.Column="4" Margin="10 0" Width="100" Content="All Clear" Click="AllClear_Click"/>
+                <Button Grid.Column="3" Margin="10 0 0 0" Width="100" Content="Delect Choosed" Click="DelectChoosed_Click"/>
+                <Button Grid.Column="4" Margin="10 0 0 0" Width="100" Content="All Clear" Click="AllClear_Click"/>
+                <Button Grid.Column="5" Margin="10 0" Width="100" Content="Save / Load" Click="SL_Click"/>
             </Grid>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>

@@ -1,4 +1,3 @@
-C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.csproj.AssemblyReference.cache
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\MainWindow.g.cs
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\App.g.cs
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork_MarkupCompile.cache
@@ -19,7 +18,17 @@ C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\Look_WIH.g.c
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\Look_WIH.baml
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\QueryShow.g.cs
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\QueryShow.baml
-C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\NormalDistribution.g.cs
-C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\NormalDistribution.baml
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\LogView.g.cs
 C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\LogView.baml
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\Look_Matrix.g.cs
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\Look_Matrix.baml
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\Look_BackQuery.g.cs
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\Look_BackQuery.baml
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\StartSetting.g.cs
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\StartSetting.baml
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\SaveAndLoad.g.cs
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\SaveAndLoad.baml
+C:\Users\user\OneDrive\桌面\NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.csproj.CopyComplete

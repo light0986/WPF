@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NeuralNetwork
 {
@@ -40,101 +34,20 @@ namespace NeuralNetwork
             set => QueryAnswer.Content = value;
         }
 
-        private List<double[,]> _QList = new List<double[,]>();
-        private double[,] QList
+        private double Rate
         {
+            set => CorrectRate.Content = value + "%";
+        }
+
+        private int _MaxValue = 0;
+        private int MaxValue
+        {
+            get => _MaxValue;
             set
             {
-                double large = 0; int x = 0;
-                for (int i = 0; i < value.GetLength(0); i++)
-                {
-                    for (int j = 0; j < value.GetLength(1); j++)
-                    {
-                        if (value[i, j] > large)
-                        {
-                            large = value[i, j];
-                            x = i;
-                        }
-                    }
-                }
-
-                Button button = new Button()
-                {
-                    BorderThickness = new Thickness(0),
-                    Height = 40,
-                    Tag = _QList.Count,
-                    Content = "Query: " + x + " Correct: " + CAnswer
-                };
-                button.Click += Button_Click;
-
-                QAnswer = x.ToString();
-                if (Convert.ToInt32(CAnswer) == x)
-                {
-                    QueryRight?.Invoke();
-                    button.Background = Brushes.LightGreen;
-                }
-                else
-                {
-                    QueryWrong?.Invoke();
-                    button.Background = Brushes.LightPink;
-                }
-
-                _ = ScoreList.Children.Add(button);
-                _QList.Add(value);
+                ScoreMax.Content = value;
+                _MaxValue = value;
             }
-        }
-
-        private bool OmWork = false;
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (OmWork == false)
-            {
-                OmWork = true;
-                int tag = (int)((Button)sender).Tag;
-                DescriptionList.Children.Clear();
-
-                double[,] list = _QList[tag];
-                for (int i = 0; i < list.GetLength(0); i++)
-                {
-                    Label label = new Label()
-                    {
-                        Content = i + ": " + list[i, 0]
-                    };
-                    DescriptionList.Children.Add(label);
-                    await Task.Delay(1);
-                }
-
-                OmWork = false;
-            }
-        }
-
-        public QueryShow()
-        {
-            InitializeComponent();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            CloseClicked?.Invoke();
-        }
-
-        public void SetCorrectAnswer(string answer)
-        {
-            CAnswer = answer;
-        }
-
-        public void SetQueryAnswer(double[,] answer)
-        {
-            QList = answer;
-        }
-
-        public void SetMaxValue(int max)
-        {
-            ScoreMax.Content = max;
-            ScoreList.Children.Clear();
-            DescriptionList.Children.Clear();
-            NowValue = 0;
         }
 
         private int _NowValue = 0;
@@ -148,9 +61,138 @@ namespace NeuralNetwork
             }
         }
 
-        public void SetNowValue()
+        private List<Answer> QList = new List<Answer>();
+        private List<string> WrongAnswer = new List<string>();
+
+        private bool OmWork = false;
+        private bool Complete = false;
+
+        public QueryShow()
+        {
+            InitializeComponent();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (OmWork == false)
+            {
+                OmWork = true;
+                int tag = (int)((Button)sender).Tag;
+                DescriptionList.Children.Clear();
+
+                double[] list = QList[tag].Output;
+                string[] name = QList[tag].Name;
+                for (int i = 0; i < list.GetLength(0); i++)
+                {
+                    Label label = new Label()
+                    {
+                        Content = name[i] + ": " + list[i]
+                    };
+                    _ = DescriptionList.Children.Add(label);
+                    await Task.Delay(1);
+                }
+
+                OmWork = false;
+            }
+        }
+
+        public bool SetQueryAnswer(string qanswer, string canswer, double[] output, string[] names)
+        {
+            Button button = new Button()
+            {
+                BorderThickness = new Thickness(0),
+                Height = 40,
+                Tag = QList.Count,
+                Content = "Query: " + qanswer + " Correct: " + canswer
+            };
+            button.Click += Button_Click;
+
+            QAnswer = qanswer;
+            CAnswer = canswer;
+
+            bool result = true;
+            if (qanswer == canswer)
+            {
+                QueryRight?.Invoke();
+                button.Background = Brushes.LightGreen;
+                result = true;
+            }
+            else
+            {
+                QueryWrong?.Invoke();
+                button.Background = Brushes.LightPink;
+                WrongAnswer.Add(CAnswer);
+                result = false;
+            }
+
+            QList.Add(new Answer() { Canswer = canswer, Qanswer = qanswer, Output = output, Name = names });
+            _ = ScoreList.Children.Add(button);
+            return result;
+        }
+
+        public void Reset()
+        {
+            ScoreList.Children.Clear();
+            DescriptionList.Children.Clear();
+            ResultsList.Children.Clear();
+            MaxValue = 0;
+            NowValue = 0;
+            //QList = new List<double[,]>();
+            WrongAnswer = new List<string>();
+            Complete = false;
+        }
+
+        public void SetComplete()
+        {
+            Complete = true;
+        }
+
+        public void AddMax()
+        {
+            MaxValue++;
+            Rate = Math.Round((double)NowValue / (double)MaxValue, 2) * 100;
+        }
+
+        public void AddValue()
         {
             NowValue++;
+        }
+
+        public async Task SetResult()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Label label = new Label()
+                {
+                    Content = i + ": " + WrongAnswer.Count(x => x == i.ToString()) + " times"
+                };
+
+                _ = ResultsList.Children.Add(label);
+            }
+            await Task.Delay(1);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Complete)
+            {
+                CloseClicked?.Invoke();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private class Answer
+        {
+            public string Qanswer { get; set; }
+
+            public string Canswer { get; set; }
+
+            public double[] Output { get; set; }
+
+            public string[] Name { get; set; }
         }
     }
 }

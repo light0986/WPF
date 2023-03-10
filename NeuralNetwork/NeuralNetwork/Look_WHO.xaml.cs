@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NeuralNetwork
 {
@@ -21,36 +13,25 @@ namespace NeuralNetwork
     public partial class Look_WHO : UserControl
     {
         public delegate void Event();
-        public event Event BackClicked;
+        public event Event CloseClicked;
 
-        private readonly double[,] WHO;
+        private List<Network> networkList = new List<Network>();
         private bool OnWork = true;
 
-        public Look_WHO(double[,] who)
+        public Look_WHO()
         {
             InitializeComponent();
-            WHO = who;
             Loaded += Look_WHO_Loaded;
         }
 
         private async void Look_WHO_Loaded(object sender, RoutedEventArgs e)
         {
-            WorkProgress.Maximum = WHO.GetLength(0);
+            WorkProgress.Maximum = networkList.Count;
             WorkProgress.Value = 0;
-            Style style = (Style)Resources["NoStyle"];
 
-            for (int i = 0; i < WHO.GetLength(0); i++)
+            for (int i = 0; i < networkList.Count; i++)
             {
-                Grid grid = new Grid();
-                Button button = new Button
-                {
-                    Tag = i,
-                    Style = style,
-                    Content = i
-                };
-                button.Click += Button_Click;
-                _ = grid.Children.Add(button);
-                _ = MatrixView.Children.Add(grid);
+                _ = NeuralList.Items.Add(networkList[i].Name);
                 WorkProgress.Value++;
                 await Task.Delay(1);
             }
@@ -58,78 +39,128 @@ namespace NeuralNetwork
             OnWork = false;
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (OnWork == false)
             {
                 OnWork = true;
-
                 RowArray.Children.Clear();
-                Button button = (Button)sender;
-                int tag = (int)button.Tag;
 
-                WorkProgress.Maximum = WHO.GetLength(1);
-                WorkProgress.Value = 0;
-
-                int i = 0;
-                do
+                if (NeuralList.SelectedIndex != -1)
                 {
-                    if (i < WHO.GetLength(1))
+                    MatrixView.Items.Clear();
+                    WorkProgress.Maximum = networkList.Count;
+                    WorkProgress.Value = 0;
+
+                    for (int i = 0; i < networkList[NeuralList.SelectedIndex].neural.who.GetLength(0); i++)
                     {
-                        StackPanel stack = new StackPanel()
-                        {
-                            Orientation = Orientation.Horizontal
-                        };
-
-                        for (int j = 0; j < 10; j++)
-                        {
-                            if (i < WHO.GetLength(1))
-                            {
-                                Label label = new Label()
-                                {
-                                    Width = 40,
-                                    Content = WHO[tag, i]
-                                };
-
-                                if (WHO[tag, i] > 0)
-                                {
-                                    label.Background = Brushes.LightGreen;
-                                }
-                                else
-                                {
-                                    label.Background = Brushes.LightPink;
-                                }
-
-                                _ = stack.Children.Add(label);
-                                i++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-
-                        }
-
-                        WorkProgress.Value = i;
-                        _ = RowArray.Children.Add(stack);
+                        _ = MatrixView.Items.Add(i);
+                        WorkProgress.Value++;
                     }
-                    else
-                    {
-                        break;
-                    }
-
-                    await Task.Delay(1);
                 }
-                while (true);
 
                 OnWork = false;
             }
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private async void MatrixView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BackClicked?.Invoke();
+            if (OnWork == false)
+            {
+                OnWork = true;
+                RowArray.Children.Clear();
+
+                if (MatrixView.SelectedIndex != -1)
+                {
+                    int index = NeuralList.SelectedIndex;
+                    int row = MatrixView.SelectedIndex;
+                    WorkProgress.Maximum = networkList[index].neural.who.GetLength(1);
+                    WorkProgress.Value = 0;
+
+                    int sqr = (int)Math.Sqrt(networkList[index].neural.who.GetLength(1));
+
+                    int i = 0;
+                    do
+                    {
+                        if (i < networkList[index].neural.who.GetLength(1))
+                        {
+                            StackPanel stack = new StackPanel()
+                            {
+                                Orientation = Orientation.Horizontal
+                            };
+
+                            for (int j = 0; j < sqr; j++)
+                            {
+                                if (i < networkList[index].neural.who.GetLength(1))
+                                {
+                                    Label label = new Label()
+                                    {
+                                        Width = 50,
+                                        Content = networkList[index].neural.who[row, i]
+                                    };
+
+                                    if (networkList[index].neural.who[row, i] > 0)
+                                    {
+                                        SolidColorBrush solidColor = new SolidColorBrush
+                                        {
+                                            Color = Color.FromRgb(255, 0, 0),
+                                            Opacity = networkList[index].neural.who[row, i]
+                                        };
+                                        label.Background = solidColor;
+                                    }
+                                    else
+                                    {
+                                        SolidColorBrush solidColor = new SolidColorBrush
+                                        {
+                                            Color = Color.FromRgb(0, 255, 0),
+                                            Opacity = networkList[index].neural.who[row, i] * -1
+                                        };
+                                        label.Background = solidColor;
+                                    }
+
+                                    _ = stack.Children.Add(label);
+                                    i++;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+
+                            }
+
+                            WorkProgress.Value = i;
+                            _ = RowArray.Children.Add(stack);
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+                        await Task.Delay(1);
+                    }
+                    while (true);
+                }
+
+                OnWork = false;
+            }
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            CloseClicked?.Invoke();
             Visibility = Visibility.Hidden;
+        }
+
+        public void SetnetWorkList(string Name, neuralNetwork neural)
+        {
+            networkList.Add(new Network() { Name = Name, neural = neural });
+        }
+
+        private class Network
+        {
+            public string Name { get; set; }
+
+            public neuralNetwork neural { get; set; }
         }
     }
 }

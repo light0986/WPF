@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Matrix:" Margin="10 10 0 0" Grid.Column="0"/>
+                <Label Content="Neural List:" Margin="10 10 0 0" Grid.Column="0"/>
                 <Label Content="Row:" Margin="10 10 0 0" Grid.Column="1"/>
             </Grid>
             <Grid Grid.Row="1" Margin="10 10 10 0">
@@ -35,13 +35,20 @@
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Margin="0 0 5 0">
-                    <ScrollViewer>
-                        <StackPanel x:Name="MatrixView">
-
-                        </StackPanel>
-                    </ScrollViewer>
-                </Border>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Margin="0 0 5 0">
+                        <ListBox x:Name="NeuralList" SelectionChanged="ListView_SelectionChanged"/>
+                    </Border>
+                    <Label Grid.Row="1" Content="Matrix:" Margin="0 10 0 0" Grid.Column="0"/>
+                    <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Margin="0 0 5 0">
+                        <ListBox x:Name="MatrixView" SelectionChanged="MatrixView_SelectionChanged"/>
+                    </Border>
+                </Grid>
                 <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="5 0 0 0">
                     <Viewbox Stretch="Fill">
                         <StackPanel Name="RowArray"/>
@@ -56,7 +63,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Width="50" Height="50" Margin="10" Content="Back" Click="Back_Click"/>
+                <Button Grid.Column="0" Width="50" Height="50" Margin="10" Content="Close" Click="Close_Click"/>
                 <ProgressBar x:Name="WorkProgress" Height="10" Grid.Column="1" Margin="10 5 10 10"/>
                 <Label Grid.Column="2" Content="{Binding ElementName=WorkProgress, Path=Value}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Label Grid.Column="3" Content="/" VerticalAlignment="Center"/>
