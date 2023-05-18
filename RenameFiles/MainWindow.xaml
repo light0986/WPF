@@ -1,0 +1,52 @@
+﻿<Window x:Class="RenameFile.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RenameFile"
+        mc:Ignorable="d"
+        Title="批量重新命名" Height="300" Width="300" WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanMinimize" Closing="Window_Closing" Icon="1503040663-7b6370c5467e9088e145bb860153bd9e.ico">
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <TextBlock TextWrapping="Wrap" Margin="5">
+                　　說明: 這是一個甚麼鬼東東呢?
+                <LineBreak/>
+                <LineBreak/>
+                　　這是一個批量選擇檔案後，自動幫他們重新命名的工具，只是為了方便管理用的。
+                <LineBreak/>
+                <LineBreak/>
+                　　例如: 你現在有100張照片，你想要用001~100來排列他們，或是用不重複的隨機碼來命名他們時，你可以拿來用。
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Margin="0 5 0 0" Grid.Column="0" Grid.Row="0" Content="讀取檔案" Click="Load_Click" IsEnabled="{Binding Enable}"/>
+            <RadioButton GroupName="Type" IsChecked="True" Margin="5" Grid.Column="1" Grid.Row="0" 
+                         VerticalContentAlignment="Center" ToolTip="先把檔案改成GUID，再改成序列 + 檔案類型命名"
+                         Content="序列命名" Click="RadioButton_Click" Tag="Sequence" IsEnabled="{Binding Enable}"/>
+            <RadioButton GroupName="Type" Margin="5" Grid.Column="2" VerticalContentAlignment="Center" 
+                         ToolTip="以GUID + 檔案類型命名" Grid.Row="0"
+                         Content="不重複隨機命名" Click="RadioButton_Click" Tag="Random" IsEnabled="{Binding Enable}"/>
+            <Button Margin="0 5 0 0" Grid.Column="0" Content="清空" Click="Clear_Click" Grid.Row="1" IsEnabled="{Binding Enable}"/>
+            <Label Grid.Column="1" Content="{Binding TotalCount}" Grid.Row="1"/>
+            <Button Margin="0 5 0 0" Grid.Column="2" Content="開始" Grid.Row="1" Click="Start_Click"/>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5">
+            <ProgressBar Grid.Column="1" Value="{Binding Progress}" Maximum="{Binding MaxProgress}"/>
+        </Grid>
+    </Grid>
+</Window>
