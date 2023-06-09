@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="NeuralNetwork.StartSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NeuralNetwork"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.3"/>
+        </Grid.Background>
+        <Grid Background="White" Height="350" Width="400">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="10 10 10 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="輸入節點: " Margin="10" HorizontalContentAlignment="Right"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="隱藏節點: " Margin="10" HorizontalContentAlignment="Right"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="輸出節點: " Margin="10" HorizontalContentAlignment="Right"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="學習率(指數):" Margin="10" HorizontalContentAlignment="Right"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="圖片大小:" Margin="10" HorizontalContentAlignment="Right"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="類型:" Margin="10" HorizontalContentAlignment="Right"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="1 5" PreviewTextInput="TextBox_PreviewTextInput" Text="784" Name="Inputnodes"
+                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="1 5" PreviewTextInput="TextBox_PreviewTextInput" Text="100" Name="Hiddennodes"
+                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="1 5" PreviewTextInput="TextBox_PreviewTextInput" Text="10" Name="Outputnodes"
+                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="1 5" PreviewTextInput="TextBox_PreviewTextInput_1" Text="0.1" Name="Learningrate"
+                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Grid Grid.Row="4" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="長度 =" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <TextBox Grid.Column="1" Margin="1 5 1 5" PreviewTextInput="TextBox_PreviewTextInput" Text="28" Name="Rows"
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label Grid.Column="2" Content="寬度 =" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <TextBox Grid.Column="3" Margin="1 5 1 5" PreviewTextInput="TextBox_PreviewTextInput" Text="28" Name="Columns"
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="5" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton GroupName="Type" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" Checked="RadioButton_Checked" Content="單一物件"/>
+                    <RadioButton GroupName="Type" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked" Content="多物件"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Content="OK" Height="40" Width="100" Click="Button_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
