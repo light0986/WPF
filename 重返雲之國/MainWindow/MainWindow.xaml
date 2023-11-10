@@ -13,7 +13,7 @@
             <Grid x:Name="MainGrid"/>
             <Border x:Name="GrayMask" Background="Black" Opacity="0.5" Visibility="Hidden"/>
             <Label Content="Press Enter" Foreground="White" FontSize="20" 
-                   Visibility="{Binding ElementName=GameRules, Path=Visibility}"
+                   Visibility="Hidden" Name="PressEnter"
                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Border VerticalAlignment="Bottom" Margin="100 50" Name="GameRules" Width="auto" Height="auto"
                     CornerRadius="10" Background="Black" Visibility="Hidden">

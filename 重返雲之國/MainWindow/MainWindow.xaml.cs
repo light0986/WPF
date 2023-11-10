@@ -301,11 +301,13 @@ namespace 重返雲之國_外傳
                         else { RemainLife.Text = "剩餘接關數量: " + player.ContinueTime + "次"; }
 
                         GameRules.Visibility = Visibility.Visible;
+                        PressEnter.Visibility = Visibility.Visible;
                         GrayMask.Visibility = Visibility.Visible;
                     }
                     else
                     {
                         GameRules.Visibility = Visibility.Hidden;
+                        PressEnter.Visibility = Visibility.Hidden;
                         GrayMask.Visibility = Visibility.Hidden;
                     }
                 };
@@ -557,8 +559,16 @@ namespace 重返雲之國_外傳
                 setting.UsePause += (bool isPause) =>
                 {
                     OnPause = isPause;
-                    if (OnPause) { GrayMask.Visibility = Visibility.Visible; }
-                    else { GrayMask.Visibility = Visibility.Hidden; }
+                    if (OnPause)
+                    {
+                        PressEnter.Visibility = Visibility.Visible;
+                        GrayMask.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        PressEnter.Visibility = Visibility.Hidden;
+                        GrayMask.Visibility = Visibility.Hidden;
+                    }
                 };
                 MainGrid.Children.Add(setting);
             }
