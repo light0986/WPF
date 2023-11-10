@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="重返雲之國_外傳.UserControls.FailPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:重返雲之國_外傳.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid Background="Black">
+        <TextBlock Text="Game Over" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="Red">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="0" Color="Red"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Grid Width="800" Height="600" Background="White" Name="MainGrid" Opacity="1">
+            <Image Source="{Binding IMG}" Stretch="Fill" Margin="{Binding ULULUPosition}"/>
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150" Width="500" Name="SelectionGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="0" Visibility="{Binding YesVisibility}"/>
+                <TextBlock Margin="10" Text="{Binding YesText}" FontSize="20" FontWeight="Bold" Foreground="{Binding YesColor}"
+                           Grid.Column="1" Grid.Row="0" Opacity="{Binding YesOpacity}"/>
+
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="1" Visibility="{Binding NoVisibility}"/>
+                <TextBlock Margin="10" Text="我不行了" FontSize="20" FontWeight="Bold"
+                           Grid.Column="1" Grid.Row="1" Opacity="{Binding NoOpacity}"/>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

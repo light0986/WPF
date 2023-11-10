@@ -1,0 +1,179 @@
+﻿<UserControl x:Class="重返雲之國_外傳.UserControls.StartGame"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:重返雲之國_外傳.UserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800" Background="White">
+    <Grid Width="800" Height="600">
+        <!--地圖層-->
+        <Canvas Width="800" Height="600">
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background01"
+                   Canvas.Top="{Binding CloudY1}" Canvas.Left="{Binding CloudX1}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background02"
+                   Canvas.Top="{Binding CloudY1}" Canvas.Left="{Binding CloudX2}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background03"
+                   Canvas.Top="{Binding CloudY1}" Canvas.Left="{Binding CloudX3}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background11"
+                   Canvas.Top="{Binding CloudY2}" Canvas.Left="{Binding CloudX1}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background12"
+                   Canvas.Top="{Binding CloudY2}" Canvas.Left="{Binding CloudX2}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background13"
+                   Canvas.Top="{Binding CloudY2}" Canvas.Left="{Binding CloudX3}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background21"
+                   Canvas.Top="{Binding CloudY3}" Canvas.Left="{Binding CloudX1}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background22"
+                   Canvas.Top="{Binding CloudY3}" Canvas.Left="{Binding CloudX2}"/>
+            <Image Source="{Binding Cloud}" Width="801" Height="801" Name="Background23"
+                   Canvas.Top="{Binding CloudY3}" Canvas.Left="{Binding CloudX3}"/>
+        </Canvas>
+
+        <!--物件層: 武器、敵人-->
+        <Canvas Width="800" Height="600" Name="ObjectGrid">
+            <!--武器區-->
+            <Grid x:Name="WeaponGrid" Canvas.Left="{Binding HitX}" Canvas.Top="{Binding HitY}" Panel.ZIndex="9999"
+                      RenderTransformOrigin="0.5, 0.5" Width="{Binding HitWidth}" Height="{Binding HitHeight}">
+                <Grid.RenderTransform>
+                    <RotateTransform Angle="{Binding WeaponGridAngle}"/>
+                </Grid.RenderTransform>
+            </Grid>
+        </Canvas>
+
+        <!--玩家層-->
+        <Grid Width="50" Height="140">
+            <Border Height="5" Width="45" CornerRadius="20" Background="DarkGray" VerticalAlignment="Bottom" Margin="0 5 0 35"/>
+            <Image Source="{Binding PlayerIMG}" Width="{Binding PlayerWidth}" Height="{Binding PlayerHeight}"
+                   RenderTransformOrigin="0.5, 0.5" VerticalAlignment="Bottom" Margin="{Binding PlayerMargin}">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="{Binding AvoidToken}"/>
+                </Image.RenderTransform>
+            </Image>
+            <Viewbox Width="50" Height="10" VerticalAlignment="Bottom" Visibility="{Binding CureProgress}" Stretch="Fill">
+                <Grid>
+                    <Border Width="120" Height="10" VerticalAlignment="Bottom" Background="Transparent"/>
+                    <Border Width="{Binding CureToken}" Height="10" HorizontalAlignment="Left" Background="ForestGreen"/>
+                </Grid>
+            </Viewbox>
+        </Grid>
+
+        <!--連擊數量-->
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Opacity="{Binding ComboShow}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="連擊:" Grid.Row="0" Foreground="#6A9159"/>
+            <TextBlock Text="{Binding AttackCombo}" Grid.Row="0" HorizontalAlignment="Right" Foreground="PaleVioletRed"/>
+            <Border Width="50" Height="10" Grid.Row="1" BorderThickness="1" BorderBrush="Black">
+                <Viewbox Stretch="Fill">
+                    <Grid Width="10" Height="1">
+                        <Border Background="#6A9159" Width="{Binding AttackCombo}" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Viewbox>
+            </Border>
+        </Grid>
+        
+        <!--白粉-->
+        <Grid x:Name="PowderPosition" Width="102" Height="102" Margin="15 30" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+
+        <!--Boss狀態-->
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="50" Height="10" Width="500" Visibility="{Binding BossShow}">
+            <Viewbox Stretch="Fill">
+                <Grid Width="{Binding BossMaxHP}">
+                    <Border Background="LightGray" Width="{Binding BossMaxHP}" Height="10" HorizontalAlignment="Left"/>
+                    <Border Width="{Binding BossHP}" Height="10" HorizontalAlignment="Left">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="DarkSlateBlue" Offset="0.0"/>
+                                <GradientStop Color="DarkSlateBlue" Offset="0.99"/>
+                                <GradientStop Color="White" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+            </Viewbox>
+        </Grid>
+
+        <!--玩家狀態層-->
+        <Border Height="60" VerticalAlignment="Top" Width="760" Margin="0 20 0 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="San:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text=" AP:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text=" LV:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Viewbox Stretch="Fill" Margin="5">
+                        <Grid Width="1000">
+                            <Border Background="LightGray" Width="{Binding PlayerMaxHP}" Height="10" HorizontalAlignment="Left"/>
+                            <Border Width="{Binding PlayerHP}" Height="10" HorizontalAlignment="Left">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="PaleVioletRed" Offset="0.0"/>
+                                        <GradientStop Color="PaleVioletRed" Offset="0.99"/>
+                                        <GradientStop Color="White" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Viewbox Stretch="Fill" Margin="{Binding ApMargin}">
+                        <Grid Width="1000">
+                            <Border Background="LightGray" Width="{Binding PlayerMaxAP}" Height="10" HorizontalAlignment="Left"/>
+                            <Border Width="{Binding PlayerAP}" Height="10" HorizontalAlignment="Left">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="DeepSkyBlue" Offset="0.0"/>
+                                        <GradientStop Color="DeepSkyBlue" Offset="0.99"/>
+                                        <GradientStop Color="White" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+                <TextBlock Text="{Binding PlayerLV}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+        
+        <!--經驗值層-->
+        <Grid Height="15" VerticalAlignment="Bottom">
+            <Viewbox Stretch="Fill">
+                <Grid>
+                    <Border Background="LightGray" Width="{Binding PlayerMaxExp}" Height="10" HorizontalAlignment="Left"/>
+                    <Border Width="{Binding PlayerExp}" Height="10" HorizontalAlignment="Left">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="LightGreen" Offset="0.0"/>
+                                <GradientStop Color="LightGreen" Offset="0.95"/>
+                                <GradientStop Color="White" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+            </Viewbox>
+            <TextBlock Text="EXP" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!--時間層-->
+        <Label VerticalAlignment="Bottom" Margin="20" Content="{Binding TimeText}" HorizontalAlignment="Center"/>
+
+        <!--警示層-->
+        <Label Content="WARNING" FontSize="30" Name="WarningText" Opacity="1" Visibility="Hidden"
+               HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="Red" Opacity="0.5"/>
+            </Label.Effect>
+        </Label>
+    </Grid>
+</UserControl>

@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="重返雲之國_外傳.IMG.Status.StatusUp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:重返雲之國_外傳.IMG.Status"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Border" x:Key="borderStyle">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="220"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="MainGrid" Width="800" Height="600" Margin="{Binding Margin}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" IsEnabled="{Binding SANEnable}" Style="{StaticResource borderStyle}"
+                BorderThickness="{Binding SANThickness}" BorderBrush="Red">
+            <Grid>
+                <Image Source="/IMG/Status/HPUp.png" Margin="5 5 5 20"/>
+                <TextBlock Text="SAN值 +20%" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="0" IsEnabled="{Binding APEnable}" Style="{StaticResource borderStyle}"
+                BorderThickness="{Binding APThickness}" BorderBrush="Red">
+            <Grid>
+                <Image Source="/IMG/Status/APUp.png" Margin="5 5 5 20"/>
+                <TextBlock Text="行動力 +20%" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" Grid.Row="0" IsEnabled="{Binding SpeedEnable}" Style="{StaticResource borderStyle}"
+                BorderThickness="{Binding SpeedThickness}" BorderBrush="Red">
+            <Grid>
+                <Image Source="/IMG/Status/SpeedUp.png" Margin="5 5 5 20"/>
+                <TextBlock Text="敏捷 +0.5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" IsEnabled="{Binding ATKEnable}" Style="{StaticResource borderStyle}"
+                BorderThickness="{Binding ATKThickness}" BorderBrush="Red">
+            <Grid>
+                <Image Source="/IMG/Status/ATKUp.png" Margin="5 5 5 20"/>
+                <TextBlock Text="攻擊力 +1 / 行動力消耗 +2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" IsEnabled="{Binding CureEnable}" Style="{StaticResource borderStyle}"
+                BorderThickness="{Binding CureThickness}" BorderBrush="Red">
+            <Grid>
+                <Image Source="/IMG/Status/CureUp.png" Margin="5 5 5 20"/>
+                <TextBlock Text="純度 +0.5 / 持有量 +1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" Grid.Row="1" IsEnabled="{Binding CDEnable}" Style="{StaticResource borderStyle}"
+                BorderThickness="{Binding CDThickness}" BorderBrush="Red">
+            <Grid>
+                <Image Source="/IMG/Status/CDUp.png" Margin="5 5 5 20"/>
+                <TextBlock Text="填充速度 +0.5%" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+        </Border>
+        <Label Grid.Column="1" Grid.Row="2" Foreground="White" FontSize="20" Content="操控:←↑↓→ 選擇:Enter" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+    </Grid>
+</UserControl>

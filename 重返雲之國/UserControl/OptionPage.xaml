@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="重返雲之國_外傳.UserControls.OptionPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:重返雲之國_外傳.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid Width="800" Height="600" Background="White">
+        <Image Source="/IMG/開始畫面.png" Stretch="Fill" Margin="100 100 10 10"/>
+        <TextBlock Text="製作人 Light0986" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"/>
+        <Canvas>
+            <TextBlock Text="重返雲之國-外傳" Width="540" TextAlignment="Center" Foreground="#698AB5"
+                       FontSize="70" FontWeight="Bold" Canvas.Left="{Binding BigTitle}" Canvas.Top="25"/>
+            <TextBlock Text="拯救綠綠U布林！" Width="auto" TextAlignment="Center" FontSize="50" Foreground="#9ACD82" 
+                       FontWeight="Bold" Canvas.Left="{Binding SmallTitle}" Canvas.Top="110">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="6" ShadowDepth="0" Color="#FF1B3900"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <!--一開始-->
+            <TextBlock Text="請按 Enter" FontSize="20" FontWeight="Bold" Canvas.Top="350" Canvas.Left="150"
+                       Visibility="{Binding EnterTextVisibility}" Opacity="{Binding EnterTextOpacity}"/>
+
+            <!--按下Enter後會出現四種選項-->
+            <Grid Canvas.Top="272" Canvas.Left="130" Visibility="{Binding tenX_Visibility}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--1.開使遊戲-->
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="0" Visibility="{Binding StartGameVisibility}"/>
+                <TextBlock Margin="10" Text="開始遊戲" FontSize="20" FontWeight="Bold"
+                           Grid.Column="1" Grid.Row="0" Opacity="{Binding StartGameOpacity}"/>
+                
+                <!--2.歷史回顧-->
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="1" Visibility="{Binding HistoryVisibility}"/>
+                <TextBlock Margin="10" Text="歷史回顧" FontSize="20" FontWeight="Bold"
+                           Grid.Column="1" Grid.Row="1" Opacity="{Binding HistoryOpacity}"/>
+                
+                <!--3.遊戲設定-->
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="2" Visibility="{Binding SettingVisibility}"/>
+                <TextBlock Margin="10" Text="遊戲設定" FontSize="20" FontWeight="Bold"
+                           Grid.Column="1" Grid.Row="2" Opacity="{Binding SettingOpacity}"/>
+
+                <!--4.操作說明-->
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="3" Visibility="{Binding DirectionsVisibility}"/>
+                <TextBlock Margin="10" Text="操作說明" FontSize="20" FontWeight="Bold"
+                       Grid.Column="1" Grid.Row="3" Opacity="{Binding DirectionsOpacity}"/>
+            </Grid>
+                       
+            <!--選擇遊戲開使-->
+            <Grid Canvas.Top="295" Canvas.Left="130" Visibility="{Binding twentyX_Visibility}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--1.簡單-->
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="0" Visibility="{Binding EasyVisibility}"/>
+                <TextBlock Margin="10" Text="起點浮雲" FontSize="20" FontWeight="Bold"
+                           Grid.Column="1" Grid.Row="0" Opacity="{Binding EasyOpacity}"/>
+
+                <!--2.普通-->
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="1" Visibility="{Binding NormlVisibility}"/>
+                <TextBlock Margin="10" Text="進階浮雲" FontSize="20" FontWeight="Bold"
+                           Grid.Column="1" Grid.Row="1" Opacity="{Binding NormalOpacity}"/>
+
+                <!--3.困難-->
+                <Image Source="/IMG/Player/Avoid.png" Width="30" Height="30" Stretch="Fill"
+                       Grid.Column="0" Grid.Row="2" Visibility="{Binding HardVisibility}"/>
+                <TextBlock Margin="10" Text="終極浮雲" FontSize="20" FontWeight="Bold"
+                           Grid.Column="1" Grid.Row="2" Opacity="{Binding HardOpacity}"/>
+            </Grid>
+            
+        </Canvas>
+    </Grid>
+</UserControl>

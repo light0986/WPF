@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="重返雲之國_外傳.UserControls.GoodEnding"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:重返雲之國_外傳.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid Width="800" Height="600" Background="Black" Opacity="{Binding Mask}">
+        <Image Source="{Binding IMG}" Stretch="Fill" Width="800" Height="600"/>
+        <Border Width="750" Height="200" VerticalAlignment="Bottom" Margin="0 25" 
+        Visibility="{Binding TextShow}" Background="Black" Opacity="0.5"/>
+        <Grid VerticalAlignment="Bottom" Width="750" Height="200" Margin="0 25" Visibility="{Binding TextShow}">
+            <TextBlock MaxWidth="650" MaxHeight="200" FontSize="30" TextWrapping="Wrap" Foreground="White" 
+               HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding StoryText}"/>
+        </Grid>
+        <Label Content="(空白鍵下一頁)" Foreground="White" Visibility="{Binding NextShining}"
+       VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="25"/>
+    </Grid>
+</UserControl>
