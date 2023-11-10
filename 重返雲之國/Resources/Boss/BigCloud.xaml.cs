@@ -559,17 +559,18 @@ namespace 重返雲之國_外傳.IMG.Boss
                         double LY = 3 * (Y / XY);
                         PositionY += LY;
                     }
+
+                    MoveTime--;
+                    if ((MoveTime / 20) % 2 == 1) { IMG = (BitmapImage)Application.Current.TryFindResource("BigCloud01"); }
+                    else { IMG = (BitmapImage)Application.Current.TryFindResource("BigCloud02"); }
+
+                    if (MoveTime == 0) { ActionType = 0; }
                 }
-                else if (C <= 200)
+                else
                 {
                     ActionType = 5;
                 }
 
-                MoveTime--;
-                if ((MoveTime / 20) % 2 == 1) { IMG = (BitmapImage)Application.Current.TryFindResource("BigCloud01"); }
-                else { IMG = (BitmapImage)Application.Current.TryFindResource("BigCloud02"); }
-
-                if (MoveTime == 0) { ActionType = 0; }
                 if (KnockDown) { ActionType = 6; }
             }
             #endregion
