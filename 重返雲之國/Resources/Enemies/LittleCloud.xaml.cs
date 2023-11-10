@@ -458,17 +458,17 @@ namespace 重返雲之國_外傳.IMG.Enemies
                         double LY = 3 * (Y / XY);
                         PositionY += LY;
                     }
+
+                    MoveTime--;
+                    if ((MoveTime / 20) % 2 == 1) { IMG = (BitmapImage)Application.Current.TryFindResource("LittleCloud01"); }
+                    else { IMG = (BitmapImage)Application.Current.TryFindResource("LittleCloud02"); }
+
+                    if (MoveTime == 0) { ActionType = 3; }
                 }
                 else if (C <= 150)
                 {
                     ActionType = 0;
                 }
-
-                MoveTime--;
-                if((MoveTime / 20) % 2 == 1) { IMG = (BitmapImage)Application.Current.TryFindResource("LittleCloud01"); }
-                else { IMG = (BitmapImage)Application.Current.TryFindResource("LittleCloud02"); }
-
-                if (MoveTime == 0) { ActionType = 3; }
             }
             #endregion
 
@@ -726,7 +726,9 @@ namespace 重返雲之國_外傳.IMG.Enemies
 
                     double X = Math.Abs(player.StartX - PositionX);
                     double Y = Math.Abs(player.StartY - PositionY);
-                    double C = Math.Sqrt((X * X) + (Y * Y));
+                    double absX = Math.Abs(X);
+                    double absY = Math.Abs(Y);
+                    double C = Math.Sqrt((absX * absX) + (absY * absY));
 
                     //距離太遠
                     if (C > 150)
