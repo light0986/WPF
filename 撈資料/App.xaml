@@ -1,0 +1,34 @@
+﻿<Application x:Class="撈資料.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:撈資料"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <sys:String x:Key="ConnectionString">Data Source=;Initial Catalog=KidsInTaiwan;Persist Security Info=True;User ID=;Password=;</sys:String>
+        <!--
+        正式機: 
+        <sys:String x:Key="ConnectionString">Data Source=kit.hdfs.ntnu.edu.tw;Initial Catalog=KidsInTaiwan;Persist Security Info=True;User ID=;Password=;</sys:String>
+        
+        本機: 
+        <sys:String x:Key="ConnectionString">Data Source=localhost\SQLEXPRESS;Initial Catalog=KidsInTaiwan;Persist Security Info=True;User ID=;Password=;</sys:String>
+        -->
+        
+        <!-- 獲取所有View -->
+        <sys:String x:Key="SQL_TABLE_NAME">SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS;</sys:String>
+
+        <!-- 特定View刷新(因為有用select *)-->
+        <sys:String x:Key="SQL_TABLE_REFRESH">EXEC sp_RefreshView '{0}'; SELECT 'OK' as CreateOK;</sys:String>
+
+        <!-- 新增一個TempTable,並知道多少row -->
+        <sys:String x:Key="SQL_CREATE_TEMP">SELECT identity(int, 1,1) AS RowID, * INTO #{0} FROM {1} {2}; SELECT Count(*) as Count FROM #{3};</sys:String>
+        
+        <!-- 逐筆與TempTable溝通 -->
+        <sys:String x:Key="SQL_TABLE_DATA">SELECT {0} * FROM #{1} where RowID >= {2} and RowID &lt; {3};</sys:String>
+
+        <!-- 刪除掉TempTable -->
+        <sys:String x:Key="SQL_DROP_TEMP">DROP TABLE #{0}; SELECT 'OK' as DeleteOK;</sys:String>
+        
+    </Application.Resources>
+</Application>

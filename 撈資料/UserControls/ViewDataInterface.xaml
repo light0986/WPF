@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="撈資料.UserControls.ViewDataInterface"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:撈資料.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="前x筆資料(select top(x)):" Padding="5" Margin="5"/>
+                <TextBox Grid.Column="1" Margin="0 5 5 5" Text="{Binding TopX}" VerticalContentAlignment="Center" Name="TopText"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="表單名稱(from):" Padding="5" Margin="5"/>
+                <TextBox Text="{Binding SelectedTable}" Margin="0 5 5 5" Grid.Column="1" Name="FilterText"
+                         VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+            </Grid>
+            <ListBox Grid.Row="2" Margin="5 0 5 0" SelectionChanged="TableNameList_SelectionChanged"
+                     HorizontalContentAlignment="Center" ItemsSource="{Binding TABLE_NAME}" Name="TableNameList"/>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="條件(where):" Padding="5" Margin="5 5 5 0"/>
+                <TextBox Grid.Column="1" Margin="0 5 5 0" Text="{Binding Where}" ToolTip="說明: SQL的where"
+                         VerticalContentAlignment="Center" TextChanged="Where_TextChanged" Name="Where_text"/>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="{Binding RefreshText}" Margin="5" Padding="10" Click="Refresh_Click" IsEnabled="{Binding CanRefresh}"/>
+                <Button Grid.Column="1" Content="開始撈取資料" Margin="0 5 5 5" Padding="10" Click="Start_Click"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <ListView Name="DataView" Margin="0 5 5 0"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <ProgressBar Margin="0 5" Maximum="{Binding ProgressMax}" Value="{Binding ProgressValue}"/>
+                    <TextBlock Text="{Binding ProgressText}" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <ComboBox Grid.Column="1" Margin="5" SelectedIndex="0" VerticalContentAlignment="Center" Name="CSV_Style">
+                    <ComboBoxItem Content="以Tab分隔" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tag="Space"/>
+                    <ComboBoxItem Content="以 , 分隔" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tag="Comma"/>
+                </ComboBox>
+                <Button Margin="0 5 5 5" Padding="10" Content="轉出檔案" Grid.Column="2" Click="ToCSV_Click" IsEnabled="{Binding CanTransToCSV}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
