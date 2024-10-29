@@ -6,14 +6,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <sys:String x:Key="ConnectionString">Data Source=;Initial Catalog=KidsInTaiwan;Persist Security Info=True;User ID=;Password=;</sys:String>
-        <!--
-        正式機: 
-        <sys:String x:Key="ConnectionString">Data Source=kit.hdfs.ntnu.edu.tw;Initial Catalog=KidsInTaiwan;Persist Security Info=True;User ID=;Password=;</sys:String>
-        
-        本機: 
-        <sys:String x:Key="ConnectionString">Data Source=localhost\SQLEXPRESS;Initial Catalog=KidsInTaiwan;Persist Security Info=True;User ID=;Password=;</sys:String>
-        -->
+        <sys:String x:Key="ConnectionString">Data Source=;Initial Catalog=;Persist Security Info=True;User ID=;Password=;</sys:String>
         
         <!-- 獲取所有View -->
         <sys:String x:Key="SQL_TABLE_NAME">SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS;</sys:String>
